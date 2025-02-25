@@ -13,7 +13,7 @@ The project is designed to assist job seekers in ensuring that their resumes are
 
 ## <h3>🚀 Database : </h3> MySQL or mongoDB
 
-## Getting Started
+
 ### Prerequisites
 
 To build and run the application, you will need:

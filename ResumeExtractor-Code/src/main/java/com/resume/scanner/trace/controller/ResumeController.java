@@ -1,7 +1,7 @@
-package com.resume.ats.check.controller;
+package com.resume.scanner.trace.controller;
 
-import com.resume.ats.check.models.ResumeDetail;
-import com.resume.ats.check.service.ResumeService;
+import com.resume.scanner.trace.models.ResumeDetail;
+import com.resume.scanner.trace.service.ResumeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

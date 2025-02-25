@@ -1,4 +1,4 @@
-package com.resume.ats.check.models;
+package com.resume.scanner.trace.models;
 
 import java.util.Set;
 

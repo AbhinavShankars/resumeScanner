@@ -1,4 +1,4 @@
-package com.resume.ats.check.service;
+package com.resume.scanner.trace.service;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.resume.ats.check.models.ResumeDetail;
+import com.resume.scanner.trace.models.ResumeDetail;
 
 import lombok.RequiredArgsConstructor;
 /**

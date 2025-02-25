@@ -1,4 +1,4 @@
-package com.resume.ats.check.service;
+package com.resume.scanner.trace.service;
 
 import java.io.IOException;
 

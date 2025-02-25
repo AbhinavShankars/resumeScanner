@@ -4,8 +4,8 @@
 This application provide the accuracy to data and provide the matches based on user-inputs.
 
 
-## <h3>🚀 Technology : </h3>
+## <h3>🚀 Technology : </h3>  Java , springboot , microService , Apache Kafka
 
 
-## <h3>🚀 Database : </h3>
+## <h3>🚀 Database : </h3> MySQL or mongoDB
 

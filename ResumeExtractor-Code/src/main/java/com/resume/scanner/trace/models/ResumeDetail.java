@@ -42,11 +42,12 @@ public class ResumeDetail {
 	public ResumeDetail(){}
 
  public ResumeDetail( String setPhoneNo, String setFullName, String setEmail,
-																					String skills_match,String skills_Unmatch,boolean b) {
+																					String skills_match,String skills_Unmatch,String matchPercentage,boolean b) {
 		this.setPhoneNo=setPhoneNo;
 		this.setEmail=setEmail    ;
 		this.setFullName=setFullName;
 		this.skills_match=skills_match;
 		this.skills_Unmatch=skills_Unmatch;
+		this.matchPercentage=matchPercentage;
  }
 }

@@ -96,7 +96,8 @@ public class ResumeService {
 		
 		resumeRepository
 				.save(new ResumeDetail(resumeDetail.getSetPhoneNo(),resumeDetail.getSetFullName(),resumeDetail.getSetEmail(),
-																											resumeDetail.getSkills_match(),resumeDetail.getSkills_Unmatch(),false));
+																											resumeDetail.getSkills_match(),resumeDetail.getSkills_Unmatch(),
+																											resumeDetail.getMatchPercentage(),false));
 		
 	    return resumeDetail;
 	}

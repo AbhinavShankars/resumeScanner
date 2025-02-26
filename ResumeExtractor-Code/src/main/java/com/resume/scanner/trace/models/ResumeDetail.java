@@ -29,6 +29,8 @@ public class ResumeDetail {
 	private Set<String> techSkill;
 
 	private String setFullName;
+	private String skills_match;
+	private String skills_Unmatch;
 	private String setPhoneNo;
 	private String setEmail;
 
@@ -36,12 +38,15 @@ public class ResumeDetail {
 	private String setExperience;
 	private String setIDETool;
 
+
 	public ResumeDetail(){}
 
- public ResumeDetail(Set<String> techSkill, String setPhoneNo, String setFullName, String setEmail, boolean b) {
-		this.techSkill=techSkill;
+ public ResumeDetail( String setPhoneNo, String setFullName, String setEmail,
+																					String skills_match,String skills_Unmatch,boolean b) {
 		this.setPhoneNo=setPhoneNo;
 		this.setEmail=setEmail    ;
 		this.setFullName=setFullName;
+		this.skills_match=skills_match;
+		this.skills_Unmatch=skills_Unmatch;
  }
 }

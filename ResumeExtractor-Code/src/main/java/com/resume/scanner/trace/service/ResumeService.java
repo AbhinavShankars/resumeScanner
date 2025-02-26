@@ -50,7 +50,7 @@ public class ResumeService {
 		String Fname = firstName(pdfContent);
 	      	System.out.println("First Name ::: "+ Fname);
 		System.out.println("Last Name ::: "+ Lname);
-		resumeDetail.setSetFullName(Fname +""+ Lname);
+		resumeDetail.setSetFullName(Fname +" "+ Lname);
 		
 
 	    resumeDetail.setTotalKeywords(keywordExtractorService.extractKeywords(jd));

@@ -1,12 +1,12 @@
 package com.resume.scanner.trace.models;
 
-import java.util.Set;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 /**
 	* @Author: Abhinav Shankar
@@ -15,12 +15,11 @@ import lombok.NoArgsConstructor;
 	*/
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Entity
 public class ResumeDetail {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long resumeId;
 	
 	private Set<String> totalKeywords;
@@ -36,5 +35,13 @@ public class ResumeDetail {
 	private String setRole;
 	private String setExperience;
 	private String setIDETool;
-	
+
+	public ResumeDetail(){}
+
+ public ResumeDetail(Set<String> techSkill, String setPhoneNo, String setFullName, String setEmail, boolean b) {
+		this.techSkill=techSkill;
+		this.setPhoneNo=setPhoneNo;
+		this.setEmail=setEmail    ;
+		this.setFullName=setFullName;
+ }
 }

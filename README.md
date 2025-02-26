@@ -14,6 +14,8 @@ The project is designed to assist job seekers in ensuring that their resumes are
 ## <h3>🚀 Database : </h3> MySQL or mongoDB
 
 ### <h3>🚀 End to End Flow Diagram : </h3>
+![endToendFlow](https://github.com/user-attachments/assets/fca817a8-1711-482d-bcff-9a8cd5a14dc2)
+
 
 ### Prerequisites
 

@@ -24,7 +24,9 @@ To build and run the application, you will need:
 - Java 17
 - Apache Maven
 
-### How to test API
+### How to Test API
+
+ - Go to postman and click on form date and put parameter.
 
   ![image](https://github.com/user-attachments/assets/fef8a019-60ae-4265-924e-33569c19261a)
 

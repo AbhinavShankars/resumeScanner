@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
 	* @Author: Abhinav Shankar
@@ -21,11 +23,34 @@ public class ResumeController {
 	
 	private final ResumeService resumeService;
 
-
+	private static int fileUploadCount = 0;
 	
 	@PostMapping("/check-resume")
-	public ResumeDetail generateResumeDetails(@RequestParam("file") MultipartFile file,
+	public ResumeDetail generateResumeDetails(@RequestParam("file") MultipartFile[] file,
 																																											@RequestParam("jd") String jd , @RequestParam("techSkill") String techSkill  ) throws IOException{
-		return resumeService.generateResumeDetails(file,jd,techSkill);
+		List<MultipartFile> list_OF_Resume= new ArrayList<>();
+		for (MultipartFile file1 : file) {
+			if (!file1.isEmpty()) {
+				String fileName = file1.getOriginalFilename();
+				String contentType = file1.getContentType();
+				Long fileSize = file1.getSize();
+				byte[] fileData = file1.getBytes();
+
+				// Use the injected FileService instance to save the file
+			//	FileEntity savedFile = fileService.saveFile(fileName, contentType, fileSize, fileData);
+
+				fileUploadCount++;
+
+				long fileSizeKB = file1.getSize() / 1024;
+				System.out.println("*************************/n");
+				// Print file info for each file
+				System.out.println(fileUploadCount + " File uploaded | File Size: " + fileSizeKB + " KB | File Name: "
+																		+ file1.getOriginalFilename());
+				System.out.println("*************************/n");
+				list_OF_Resume.add(file1);
+			}
+		}
+
+		return resumeService.generateResumeDetails1(list_OF_Resume,jd,techSkill);
 	}
 }

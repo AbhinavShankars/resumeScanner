@@ -3,6 +3,7 @@ package com.resume.scanner.trace.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -43,7 +44,8 @@ public class ResumeDetail {
 	private String setIDETool;
 	@Column(name = "CREATED DATE")
 	private String createdDate;
-
+	@Column(name = "FILE NAME")
+	private String fileName;
 
 	public ResumeDetail(){}
 
@@ -58,7 +60,7 @@ public class ResumeDetail {
 		* @param b
 		*/
  public ResumeDetail( String setPhoneNo, String setFullName, String setEmail,
-																					String skills_match,String skills_Unmatch,String matchPercentage,String createdDate,boolean b) {
+																					String skills_match,String skills_Unmatch,String matchPercentage,String createdDate,String fileName,boolean b) {
 		this.setPhoneNo=setPhoneNo;
 		this.setEmail=setEmail    ;
 		this.setFullName=setFullName;
@@ -66,5 +68,6 @@ public class ResumeDetail {
 		this.skills_Unmatch=skills_Unmatch;
 		this.matchPercentage=matchPercentage;
 		this.createdDate=createdDate;
+		this.fileName=fileName;
  }
 }

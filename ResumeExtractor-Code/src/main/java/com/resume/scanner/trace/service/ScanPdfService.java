@@ -35,20 +35,18 @@ public class ScanPdfService {
 		List<String> ss = new ArrayList<>();
 		List<PDDocument> docs = new ArrayList<>();
 
-		for (MultipartFile file2 : list_OF_Resume){
+		for (MultipartFile file2 : list_OF_Resume) {
 			document = PDDocument.load(file2.getInputStream());
 			docs.add(document);
 
-
+		}
 			PDFTextStripper stripper1 = new PDFTextStripper();
 
 			for (int i=0;i<docs.size();i++)  {
 				String content1 = stripper1.getText(docs.get(i));
-				ss.add(content1.toLowerCase()+		file2.getOriginalFilename());
-				//			System.out.println("1.0.....PDF Content ::::"+content1+"/n");
+				ss.add(content1.toLowerCase());
 			}
-		}
-
+			
 		document.close();
 		return ss;
 	}

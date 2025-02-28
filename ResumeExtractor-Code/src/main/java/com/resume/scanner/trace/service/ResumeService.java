@@ -45,37 +45,22 @@ public class ResumeService {
 		resumeDetail.setTotalKeywords(keywordExtractorService.extractKeywords(jd));
 		
 
-		for (String keyword : resumeDetail.getTotalKeywords()) {
-			   keyword = keyword.toLowerCase();
-			
 			for (int i=0;i<pdfContent.size();i++) {
+
+				for (String keyword : resumeDetail.getTotalKeywords()) {
+					keyword = keyword.toLowerCase();
 			    	if (pdfContent.get(i).contains(keyword)) {
 				     	matchedKeywords.add(keyword);
 				     }
 			      	else {
 				     	unmatchedKeywords.add(keyword);
 				      }
+				}
 
-				double jdPercentage = (double) matchedKeywords.size() / resumeDetail.getTotalKeywords().size() * 100;
-				String matchPercentage = String.format(FORMAT, jdPercentage) + "% matched." ;
-
-				Pattern phoneNO = Pattern.compile(REGEX);
-				Matcher phoneMatch = phoneNO.matcher(pdfContent.get(i));
-				Pattern eMailPatter = Pattern.compile(REGEX1);
-				Matcher eMailMatch = eMailPatter.matcher(pdfContent.get(i));
-				phoneNoExtracted(resumeDetail, phoneMatch); // setting phone-NO
-				emailExtracted(resumeDetail, eMailMatch);  // setting Email id
-
-				String Lname = lastName(pdfContent.get(i));
-				String Fname = firstName(pdfContent.get(i));
-
-				resumeDetail.setSetFullName(Fname +" "+ Lname);
-				resumeDetail.setMatchPercentage(matchPercentage); // setting percentage
-				resumeDetail.setFileName(originalFilename.get(i));    // setting file name
-
+				resumeDetail.setFileName(originalFilename.get(i));
+			 	dataset.add(resumeDetail);
 			}
-		}   dataset.add(resumeDetail);
-
+			
 		return dataset;
 	}
 

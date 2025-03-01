@@ -16,39 +16,30 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class ScanPdfService {
 
-	public String scanPdfFromFile(MultipartFile[] file) throws IOException {
+	/**
+		* @param list_OF_Resume 
+		* @return
+		* @throws IOException
+		*/
+	public List<String> scanPdfFromFile(List<MultipartFile> list_OF_Resume) throws IOException {
 		PDDocument document =null ;
-
-		for (MultipartFile file1 : file) {
-			document = PDDocument.load(file1.getInputStream());
-		}
-
 		PDFTextStripper stripper = new PDFTextStripper();
-		String content = stripper.getText(document);
-		content = content.toLowerCase();
-		document.close();
-		return content;
-	}
 
-	public List<String> scanPdfFromFile1(List<MultipartFile> list_OF_Resume) throws IOException {
-		PDDocument document =null ;
-		List<String> ss = new ArrayList<>();
+		List<String> listofcontent = new ArrayList<>();
 		List<PDDocument> docs = new ArrayList<>();
 
-		for (MultipartFile file2 : list_OF_Resume) {
-			document = PDDocument.load(file2.getInputStream());
+		for (MultipartFile file : list_OF_Resume) {
+			document = PDDocument.load(file.getInputStream());
 			docs.add(document);
-
 		}
-			PDFTextStripper stripper1 = new PDFTextStripper();
-
+		
 			for (int i=0;i<docs.size();i++)  {
-				String content1 = stripper1.getText(docs.get(i));
-				ss.add(content1.toLowerCase());
+				String content = stripper.getText(docs.get(i));
+				listofcontent.add(content.toLowerCase());
 			}
 			
 		document.close();
-		return ss;
+		return listofcontent;
 	}
 
 }

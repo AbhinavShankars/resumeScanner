@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
 	* @Author: Abhinav Shankar
@@ -26,8 +27,8 @@ public class ResumeController {
 	private static int fileUploadCount = 0;
 	
 	@PostMapping("/check-resume")
-	public List<ResumeDetail> generateResumeDetails(@RequestParam("file") MultipartFile[] file,
-																																											@RequestParam("jd") String jd , @RequestParam("techSkill") String techSkill  ) throws IOException{
+	public Set<ResumeDetail> generateResumeDetails(@RequestParam("file") MultipartFile[] file,
+																																																@RequestParam("jd") String jd , @RequestParam("techSkill") String techSkill) throws IOException{
 		List<MultipartFile> list_OF_Resume= new ArrayList<>();
 		for (MultipartFile multipartFile : file) {
 			if (!multipartFile.isEmpty()) {
@@ -49,7 +50,7 @@ public class ResumeController {
 			listFIleName.add(fileName);
 		}
 
-		List<ResumeDetail> details = resumeService.generateResumeDetails(listFIleName, list_OF_Resume, jd, techSkill);
+		Set<ResumeDetail> details = resumeService.generateResumeDetails(listFIleName, list_OF_Resume, jd, techSkill);
 		return details;
 	}
 }

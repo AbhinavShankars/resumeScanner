@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,47 +31,51 @@ public class ResumeService {
 	private final ResumeRepository resumeRepository;
 
 
-	public List<ResumeDetail> generateResumeDetails(List<String> originalFilename, List<MultipartFile> list_OF_Resume, String jd, String techSkill) throws IOException {
+	public Set<ResumeDetail> generateResumeDetails(List<String> originalFilename, List<MultipartFile> list_OF_Resume,
+																																														String jd, String techSkill) throws IOException {
 
 		ResumeDetail resumeDetail = new ResumeDetail();
+		ResumeDetail resumeDetail1 = new ResumeDetail();
 		List<String> pdfContent = scanPdfService.scanPdfFromFile1(list_OF_Resume);
-		List<ResumeDetail> dataset = new ArrayList<>();
+		Set<ResumeDetail> dataset = new HashSet<>();
 
 		Set<String> unmatchedKeywords = new HashSet<>();
 		Set<String> matchedKeywords = new HashSet<>();
 		resumeDetail.setTotalKeywords(keywordExtractorService.extractKeywords(jd));
 		
 
-		for (String keyword : resumeDetail.getTotalKeywords()) {
-			   keyword = keyword.toLowerCase();
-			
 			for (int i=0;i<pdfContent.size();i++) {
+				for (String keyword : resumeDetail.getTotalKeywords()) {
+					keyword = keyword.toLowerCase();
+					
 			    	if (pdfContent.get(i).contains(keyword)) {
 				     	matchedKeywords.add(keyword);
 				     }
 			      	else {
 				     	unmatchedKeywords.add(keyword);
 				      }
-
-				double jdPercentage = (double) matchedKeywords.size() / resumeDetail.getTotalKeywords().size() * 100;
-				String matchPercentage = String.format(FORMAT, jdPercentage) + "% matched." ;
-
-				Pattern phoneNO = Pattern.compile(REGEX);
-				Matcher phoneMatch = phoneNO.matcher(pdfContent.get(i));
-				Pattern eMailPatter = Pattern.compile(REGEX1);
-				Matcher eMailMatch = eMailPatter.matcher(pdfContent.get(i));
-				phoneNoExtracted(resumeDetail, phoneMatch); // setting phone-NO
-				emailExtracted(resumeDetail, eMailMatch);  // setting Email id
-
-				String Lname = lastName(pdfContent.get(i));
-				String Fname = firstName(pdfContent.get(i));
-
-				resumeDetail.setSetFullName(Fname +" "+ Lname);
-				resumeDetail.setMatchPercentage(matchPercentage); // setting percentage
-				resumeDetail.setFileName(originalFilename.get(i));    // setting file name
-
 			}
-		}   dataset.add(resumeDetail);
+					double jdPercentage = (double) matchedKeywords.size() / resumeDetail.getTotalKeywords().size() * 100;
+					String matchPercentage = String.format(FORMAT, jdPercentage) + "% matched.";
+
+					Pattern phoneNO = Pattern.compile(REGEX);
+					Matcher phoneMatch = phoneNO.matcher(pdfContent.get(i));
+					Pattern eMailPatter = Pattern.compile(REGEX1);
+					Matcher eMailMatch = eMailPatter.matcher(pdfContent.get(i));
+					phoneNoExtracted(resumeDetail, phoneMatch); // setting phone-NO
+					emailExtracted(resumeDetail, eMailMatch);  // setting Email id
+
+					String Lname = lastName(pdfContent.get(i));
+					String Fname = firstName(pdfContent.get(i));
+
+					resumeDetail.setSetFullName(Fname + " " + Lname);
+					resumeDetail.setMatchPercentage(matchPercentage); // setting percentage
+					resumeDetail.setFileName(originalFilename.get(i));    // setting file name
+
+					dataset.add(resumeDetail);
+					
+		}
+		
 
 		return dataset;
 	}

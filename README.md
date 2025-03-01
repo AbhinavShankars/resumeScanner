@@ -51,5 +51,6 @@ To build and run the application, you will need:
 This project was inspired by the need to optimize resumes for ATS systems, and is made possible by the Apache OpenNLP library.
 
 ## Thanks for visit
- https://media.giphy.com/media/3odxXG6oUNRVhsdcLK/giphy.gif
+ ![thanks](https://github.com/user-attachments/assets/beb52980-f4db-4ac9-a3e7-ef8f9e37893d)
+
 

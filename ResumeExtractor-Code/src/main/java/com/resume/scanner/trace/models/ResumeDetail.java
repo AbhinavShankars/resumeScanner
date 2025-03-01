@@ -25,6 +25,8 @@ public class ResumeDetail {
 	private Set<String> unMatchedKeywords;
 	@Column(name = "MATCH PERCENTAGE")
 	private String matchPercentage;
+	@Column(name = "UNMATCH PERCENTAGE")
+	private String unmatchPercentage;
 	private Set<String> techSkill;
 	@Column(name = "CANDIDATE FULL NAME")
 	private String setFullName;
@@ -38,14 +40,14 @@ public class ResumeDetail {
 	private String setEmail;
 	@Column(name = "CANDIDATE ROLE")
 	private String setRole;
-	@Column(name = "EXPERIENCE")
-	private String setExperience;
 	@Column(name = "IDE TOOL")
 	private String setIDETool;
 	@Column(name = "CREATED DATE")
 	private String createdDate;
 	@Column(name = "FILE NAME")
 	private String fileName;
+	@Column(name = "EXPERIENCE")
+	private String experience;
 
 	public ResumeDetail(){}
 
@@ -60,7 +62,8 @@ public class ResumeDetail {
 		* @param b
 		*/
  public ResumeDetail( String setPhoneNo, String setFullName, String setEmail,
-																					String skills_match,String skills_Unmatch,String matchPercentage,String createdDate,String fileName,boolean b) {
+																					String skills_match,String skills_Unmatch,String matchPercentage,String createdDate,
+																						String fileName,String experience,boolean b) {
 		this.setPhoneNo=setPhoneNo;
 		this.setEmail=setEmail    ;
 		this.setFullName=setFullName;
@@ -69,5 +72,6 @@ public class ResumeDetail {
 		this.matchPercentage=matchPercentage;
 		this.createdDate=createdDate;
 		this.fileName=fileName;
+		this.experience=experience;
  }
 }

@@ -28,7 +28,9 @@ public class ResumeController {
 	
 	@PostMapping("/check-resume")
 	public Set<ResumeDetail> generateResumeDetails(@RequestParam("file") MultipartFile[] file,
-																																																@RequestParam("jd") String jd , @RequestParam("techSkill") String techSkill) throws IOException{
+																																																@RequestParam("jd") String jd ,
+																																																@RequestParam("techSkill") String techSkill,
+																																																@RequestParam("experience") String experience) throws IOException{
 		List<MultipartFile> list_OF_Resume= new ArrayList<>();
 		for (MultipartFile multipartFile : file) {
 			if (!multipartFile.isEmpty()) {
@@ -50,7 +52,7 @@ public class ResumeController {
 			listFIleName.add(fileName);
 		}
 
-		Set<ResumeDetail> details = resumeService.generateResumeDetails(listFIleName, list_OF_Resume, jd, techSkill);
+		Set<ResumeDetail> details = resumeService.generateResumeDetails(listFIleName, list_OF_Resume, jd, techSkill,experience);
 		return details;
 	}
 }

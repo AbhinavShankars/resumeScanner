@@ -32,10 +32,9 @@ public class ResumeService {
 
 
 	public Set<ResumeDetail> generateResumeDetails(List<String> originalFilename, List<MultipartFile> list_OF_Resume,
-																																														String jd, String techSkill) throws IOException {
+																																																String jd, String techSkill, String experience) throws IOException {
 
 		ResumeDetail resumeDetail = new ResumeDetail();
-		ResumeDetail resumeDetail1 = new ResumeDetail();
 		List<String> pdfContent = scanPdfService.scanPdfFromFile1(list_OF_Resume);
 		Set<ResumeDetail> dataset = new HashSet<>();
 
@@ -43,7 +42,6 @@ public class ResumeService {
 		Set<String> matchedKeywords = new HashSet<>();
 		resumeDetail.setTotalKeywords(keywordExtractorService.extractKeywords(jd));
 		
-
 			for (int i=0;i<pdfContent.size();i++) {
 				for (String keyword : resumeDetail.getTotalKeywords()) {
 					keyword = keyword.toLowerCase();
@@ -58,6 +56,9 @@ public class ResumeService {
 					double jdPercentage = (double) matchedKeywords.size() / resumeDetail.getTotalKeywords().size() * 100;
 					String matchPercentage = String.format(FORMAT, jdPercentage) + "% matched.";
 
+				double jdPercentage_unMatched = (double) unmatchedKeywords.size() / resumeDetail.getTotalKeywords().size() * 100;
+				String unmatchPercentage = String.format(FORMAT, jdPercentage_unMatched) + "% not matched.";
+
 					Pattern phoneNO = Pattern.compile(REGEX);
 					Matcher phoneMatch = phoneNO.matcher(pdfContent.get(i));
 					Pattern eMailPatter = Pattern.compile(REGEX1);
@@ -70,8 +71,9 @@ public class ResumeService {
 
 					resumeDetail.setSetFullName(Fname + " " + Lname);
 					resumeDetail.setMatchPercentage(matchPercentage); // setting percentage
+			 	resumeDetail.setUnmatchPercentage(unmatchPercentage); // setting UN-percentage
 					resumeDetail.setFileName(originalFilename.get(i));    // setting file name
-
+				 resumeDetail.setExperience(experience);
 					dataset.add(resumeDetail);
 					
 		}

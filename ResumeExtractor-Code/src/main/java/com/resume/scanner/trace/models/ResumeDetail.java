@@ -46,6 +46,7 @@ public class ResumeDetail {
  private String hardSkill;
  private String softSkill;
  private String degree;
+ private String wordsFound;
 
 
  public ResumeDetail() {

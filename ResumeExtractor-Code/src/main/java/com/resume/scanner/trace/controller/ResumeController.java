@@ -25,7 +25,8 @@ public class ResumeController {
 	
 	@PostMapping("/check-resume")
 	public ResumeDetail generateResumeDetails(@RequestParam("file") MultipartFile file,
-																																											@RequestParam("jd") String jd , @RequestParam("techSkill") String techSkill  ) throws IOException{
-		return resumeService.generateResumeDetails(file,jd,techSkill);
+																																											@RequestParam("experience") String experience,
+																																											@RequestParam("techSkill") String techSkill,	@RequestParam("jd") String jd ) throws IOException{
+		return resumeService.generateResumeDetails(file,experience,techSkill,jd);
 	}
 }

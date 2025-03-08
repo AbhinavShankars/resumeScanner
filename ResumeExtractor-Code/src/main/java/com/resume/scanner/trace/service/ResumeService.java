@@ -30,13 +30,21 @@ public class ResumeService {
 	private final KeywordExtractorService keywordExtractorService;
 	private final ScanPdfService scanPdfService;
 	private final ResumeRepository resumeRepository;
-	
-	public ResumeDetail generateResumeDetails(MultipartFile file, String jd, String techSkill) throws IOException{
+
+	/**
+		* @param file 
+		* @param experience
+		* @param techSkill
+		* @param jd
+		* @return
+		* @throws IOException
+		*/
+	public ResumeDetail generateResumeDetails(MultipartFile file, String experience, String techSkill, String jd) throws IOException{
 		
-		ResumeDetail resumeDetail=new ResumeDetail();
+	       	ResumeDetail resumeDetail=new ResumeDetail();
 		
 	        String pdfContent = scanPdfService.scanPdfFromFile(file);
-				     //	System.out.println(pdfContent);
+
 
 		       Pattern phoneNO = Pattern.compile(REGEX);
 		       Matcher phoneMatch = phoneNO.matcher(pdfContent);
@@ -48,12 +56,12 @@ public class ResumeService {
 
 									String Lname = lastName(pdfContent);
 	       	String Fname = firstName(pdfContent);
-									resumeDetail.setSetFullName(Fname +" "+ Lname);
+									resumeDetail.setFullName(Fname +" "+ Lname);
 		
 
 	    resumeDetail.setTotalKeywords(keywordExtractorService.extractKeywords(jd));
-
 	   	resumeDetail.setTechSkill(keywordExtractorService.extractKeywords(techSkill));
+					
 		   Set<String> matchedSkill = new HashSet<>();
 		   Set<String> unMatchedSkill = new HashSet<>();
 
@@ -95,11 +103,13 @@ public class ResumeService {
 		String formattedDate = localDateTime.format(dateTimeFormatter);
 
 		resumeDetail.setCreatedDate(formattedDate);
+		resumeDetail.setExperience(experience);
 
 		// Perform DB Operations
-		resumeRepository.save(new ResumeDetail(resumeDetail.getSetPhoneNo(),resumeDetail.getSetFullName(),
-																																									resumeDetail.getSetEmail(),resumeDetail.getSkills_match(),
+		resumeRepository.save(new ResumeDetail(resumeDetail.getPhoneNo(),resumeDetail.getFullName(),
+																																									resumeDetail.getEmail(),resumeDetail.getSkills_match(),
 																																									resumeDetail.getSkills_Unmatch(), resumeDetail.getMatchPercentage(),
+																																									resumeDetail.getExperience() ,
 																																									resumeDetail.getCreatedDate(),false));
 		return resumeDetail;
 	}
@@ -110,7 +120,7 @@ public class ResumeService {
 		*/
 	private static void emailExtracted(ResumeDetail resumeDetail, Matcher eMailMatch) {
 		while (eMailMatch.find()) {
-			resumeDetail.setSetEmail(eMailMatch.group(1));
+			resumeDetail.setEmail(eMailMatch.group(1));
 		}
 	}
 
@@ -120,7 +130,7 @@ public class ResumeService {
 		*/
 	private static void phoneNoExtracted(ResumeDetail resumeDetail, Matcher phoneMatch) {
 		while (phoneMatch.find()) {
-			resumeDetail.setSetPhoneNo(phoneMatch.group());
+			resumeDetail.setPhoneNo(phoneMatch.group());
 		}
 	}
 

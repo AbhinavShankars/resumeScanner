@@ -24,23 +24,24 @@ public class ResumeDetail {
 	private Set<String> unMatchedKeywords;
 	@Column(name = "MATCH PERCENTAGE")
 	private String matchPercentage;
+	@Column(name = "UNMATCH PERCENTAGE")
+	private String unMatchPercentage;
 	private Set<String> techSkill;
 	@Column(name = "CANDIDATE FULL NAME")
-	private String setFullName;
+	private String fullName;
 	@Column(name = "SKILL MATCH")
 	private String skills_match;
 	@Column(name = "SKILL UNMATCH")
 	private String skills_Unmatch;
 	@Column(name = "CANDIDATE PHONE NUMBER")
-	private String setPhoneNo;
+	private String phoneNo;
 	@Column(name = "CANDIDATE EMAIL")
-	private String setEmail;
+	private String email;
 	@Column(name = "CANDIDATE ROLE")
-	private String setRole;
+	private String Role;
 	@Column(name = "EXPERIENCE")
-	private String setExperience;
-	@Column(name = "IDE TOOL")
-	private String setIDETool;
+	private String experience;
+	private String softSkill;
 	@Column(name = "CREATED DATE")
 	private String createdDate;
 
@@ -48,23 +49,35 @@ public class ResumeDetail {
 	public ResumeDetail(){}
 
 	/**
-		* @param setPhoneNo phoneNO
-		* @param setFullName   Full Name
-		* @param setEmail      Candidate email
+		* @param phoneNo phoneNO
+		* @param fullName   Full Name
+		* @param email      Candidate email
 		* @param skills_match   matched skill
 		* @param skills_Unmatch   unmatched skill
 		* @param matchPercentage   matched percentage
 		* @param createdDate     Created Date
 		* @param b
 		*/
- public ResumeDetail( String setPhoneNo, String setFullName, String setEmail,
+ public ResumeDetail( String phoneNo, String fullName, String email,
 																					String skills_match,String skills_Unmatch,String matchPercentage,String createdDate,boolean b) {
-		this.setPhoneNo=setPhoneNo;
-		this.setEmail=setEmail    ;
-		this.setFullName=setFullName;
+		this.phoneNo=phoneNo;
+		this.email=email;
+		this.fullName=fullName;
 		this.skills_match=skills_match;
 		this.skills_Unmatch=skills_Unmatch;
 		this.matchPercentage=matchPercentage;
 		this.createdDate=createdDate;
  }
+
+	public ResumeDetail( String setPhoneNo, String setFullName, String setEmail,
+																						String skills_match,String skills_Unmatch,String matchPercentage,String experience,String createdDate,boolean b) {
+		this.phoneNo=setPhoneNo;
+		this.email=setEmail    ;
+		this.fullName=setFullName;
+		this.skills_match=skills_match;
+		this.skills_Unmatch=skills_Unmatch;
+		this.matchPercentage=matchPercentage;
+		this.experience=experience;
+		this.createdDate=createdDate;
+	}
 }

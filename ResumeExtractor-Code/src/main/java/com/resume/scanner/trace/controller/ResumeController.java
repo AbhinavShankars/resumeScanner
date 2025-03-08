@@ -11,22 +11,27 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 /**
-	* @Author: Abhinav Shankar
-	* @Description: controller to get the input from UI
-	* @Date: 22 Feb;2025
-	*/
+ * @Author: Abhinav Shankar
+ * @Description: controller to get the input from UI
+ * @Date: 22 Feb;2025
+ */
 @RestController
 @RequiredArgsConstructor
 public class ResumeController {
-	
-	private final ResumeService resumeService;
+
+ private final ResumeService resumeService;
 
 
-	
-	@PostMapping("/check-resume")
-	public ResumeDetail generateResumeDetails(@RequestParam("file") MultipartFile file,
-																																											@RequestParam("experience") String experience,
-																																											@RequestParam("techSkill") String techSkill,	@RequestParam("jd") String jd ) throws IOException{
-		return resumeService.generateResumeDetails(file,experience,techSkill,jd);
-	}
+ /**
+  * @param file       :upload pdf
+  * @param experience put experience
+  * @param techSkill  : put skill
+  * @param jd         : put JD
+  * @return : object of ResumeDetails
+  * @throws IOException Exception
+  */
+ @PostMapping("/check-resume")
+ public ResumeDetail generateResumeDetails(@RequestParam("file") MultipartFile file, @RequestParam("experience") String experience, @RequestParam("techSkill") String techSkill, @RequestParam("jd") String jd) throws IOException {
+  return resumeService.generateResumeDetails(file, experience, techSkill, jd);
+ }
 }

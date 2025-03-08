@@ -24,6 +24,13 @@ To build and run the application, you will need:
 - Java 17
 - Apache Maven
 
+### How to Test API
+
+ - Go to postman and click on form date and put parameter.
+
+  ![image](https://github.com/user-attachments/assets/fef8a019-60ae-4265-924e-33569c19261a)
+
+
 ## Installation:
 
 - Clone this repository to your local machine
@@ -42,5 +49,8 @@ To build and run the application, you will need:
 
 ## Acknowledgments
 This project was inspired by the need to optimize resumes for ATS systems, and is made possible by the Apache OpenNLP library.
+
+## Thanks for visit
+ ![thanks](https://github.com/user-attachments/assets/beb52980-f4db-4ac9-a3e7-ef8f9e37893d)
 
 

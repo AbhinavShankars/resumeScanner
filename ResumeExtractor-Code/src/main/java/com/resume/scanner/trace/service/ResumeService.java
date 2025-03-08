@@ -1,6 +1,5 @@
 package com.resume.scanner.trace.service;
 
-import ch.qos.logback.core.subst.Tokenizer;
 import com.resume.scanner.trace.models.ResumeDetail;
 import com.resume.scanner.trace.repository.ResumeRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @Author: Abhinav Shankar
@@ -102,7 +102,7 @@ public class ResumeService {
   String pdfContent = scanPdfService.scanPdfFromFile(file);
 
   extractContent(resumeDetail, pdfContent);
-  
+
   resumeDetail.setTotalKeywords(keywordExtractorService.extractKeywords(jd));
   resumeDetail.setTechSkill(keywordExtractorService.extractKeywords(techSkill));
 
@@ -111,8 +111,8 @@ public class ResumeService {
 
   Set<String> unmatchedKeywords = new HashSet<>();
   Set<String> matchedKeywords = new HashSet<>();
-  
-  
+
+
   for (String keyword : resumeDetail.getTotalKeywords()) {
    keyword = keyword.toLowerCase();
    if (pdfContent.contains(keyword)) {
@@ -121,7 +121,7 @@ public class ResumeService {
     unmatchedKeywords.add(keyword);
    }
   }
-  countKeywordsInFile(resumeDetail.getTotalKeywords(), pdfContent,resumeDetail);
+  countKeywordsInFile(resumeDetail.getTotalKeywords(), pdfContent, resumeDetail);
   for (String skill : resumeDetail.getTechSkill()) {
    skill = skill.toLowerCase();
    if (pdfContent.contains(skill)) {
@@ -162,19 +162,28 @@ public class ResumeService {
  public void countKeywordsInFile(Set<String> keyword, String file, ResumeDetail resumeDetail) throws IOException {
   String[] strArry = new String[0];
   int count = 0;
+  List<String> list = new ArrayList<>(200);
+  HashMap<String, Integer> content = new HashMap<String, Integer>();
 
   for (String word : keyword) {
    word = word.toLowerCase();
-    strArry = file.split(word);
+   strArry = file.split(word);
    if (strArry.length > 1) {
     count = count + strArry.length - 1;
    } else {
-    if (file==word) {
+    if (file == word) {
      count++;
     }
    }
-   System.out.println("2.0........."+word +" came "+count);
+   content.put(word, count);
+   list = Arrays.asList(content.toString());
+
   }
+
+  resumeDetail.setWordsCount(list);
  }
- 
+
+ public static List<String> removeDuplicate(List<String> list) {
+  return list.stream().distinct().collect(Collectors.toList());
+ }
 }

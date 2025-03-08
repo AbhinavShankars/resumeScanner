@@ -3,6 +3,8 @@ package com.resume.scanner.trace.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -46,8 +48,8 @@ public class ResumeDetail {
  private String hardSkill;
  private String softSkill;
  private String degree;
- private String wordsFound;
-
+ private List<String> wordsCount;
+ 
 
  public ResumeDetail() {
  }
@@ -60,7 +62,6 @@ public class ResumeDetail {
   * @param skills_Unmatch  unmatched skill
   * @param matchPercentage matched percentage
   * @param createdDate     Created Date
-  * @param b
   */
  public ResumeDetail(String phoneNo, String fullName, String email, String skills_match, String skills_Unmatch, String matchPercentage, String createdDate) {
   this.phoneNo = phoneNo;

@@ -6,6 +6,9 @@ We’re gonna create a React  Files upload application in that user can:
 - view all uploaded files
 - download link to file when clicking on the file name
 
+  ![image](https://github.com/user-attachments/assets/4d849836-2fb9-427f-a66f-407aea2d8201)
+
+
 
 ### Set port
 .env
